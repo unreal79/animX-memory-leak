@@ -16,6 +16,6 @@ Tested on LÖVE 11.5 on Windows 10 x64. Tested with `30log-plus`, `30log`, and `
 ## Links
 
 - Original `animX`: https://github.com/besnoi/animX
-- My fork of `animX` with fixed memory leak: https://github.com/cpeosphoros/30log-plus/
+- My fork of `animX` with fixed memory leak: https://github.com/unreal79/animX
 - Torch image: https://rone3190.itch.io/torch-32x32-animated
 - `30log-plus`: https://github.com/cpeosphoros/30log-plus/
