@@ -1,7 +1,7 @@
 
 class = require("libs/30log-plus/30log-plus")
-animx = require("libs/animX_old")
--- animx = require("libs/animX")
+-- animx = require("libs/animX_old")
+animx = require("libs/animX")
 require("GameTorch")
 
 

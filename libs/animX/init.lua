@@ -94,6 +94,7 @@ function animx.newAnimation(params)
 
 	if type(params)=='string' then
 		--Overload 1
+		print("Loading animation from XML: "..params)
 		img=(params)
 		sw,sh=img:getDimensions()
 		quads=animx.newAnimationXML(img,removeExtension(params,true)..'.xml')

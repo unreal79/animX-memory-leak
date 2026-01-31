@@ -24,11 +24,11 @@ end
 
 --Borrowed from [euler](https://github.com/YoungNeer/euler)
 function round(value,precision)
-	local temp = 10^(precision or 0)	
-	if value >= 0 then 
+	local temp = 10^(precision or 0)
+	if value >= 0 then
 		return math.floor(value * temp + 0.5) / temp
-	else 
-		return math.ceil(value * temp - 0.5) / temp 
+	else
+		return math.ceil(value * temp - 0.5) / temp
 	end
 end
 
@@ -94,6 +94,7 @@ function animx.newAnimation(params)
 
 	if type(params)=='string' then
 		--Overload 1
+		print("Loading animation from XML: "..params)
 		img=(params)
 		sw,sh=img:getDimensions()
 		quads=animx.newAnimationXML(img,removeExtension(params,true)..'.xml')
@@ -127,7 +128,7 @@ function animx.newAnimation(params)
 		]]--
 
 		--if user has not given sprites per row then let qh simply be image height
-		if not spr then 
+		if not spr then
 			qh=qh or img:getHeight()
 		else
 			if not qh then
@@ -151,7 +152,7 @@ function animx.newAnimation(params)
 			--If user has given us some quads to work with - we set this to zero if nil
 			nq=nq or 0
 		end
-		
+
 		spr = spr or nq
 
 		--If user has not given anything dissecting then make the image a quad!
@@ -196,7 +197,7 @@ function animx.newAnimation(params)
 			assert(qw and qh,"animX Error: Quad dimensions coudn't be calculated in `newAnimation`!")
 			--IMPORTANT: We want integers not highly precise floats or doubles
 			qw,qh=round(qw),round(qh)
-		end		
+		end
 
 		--Calculate offset from the startpoint
 		if startPoint then
@@ -231,7 +232,7 @@ function animx.newAnimation(params)
 		['texture']=img,
 		['frames']=quads
 	}
-	table.insert(animx.animObjs,setmetatable(animation_obj,{__index=Animation}))	
+	table.insert(animx.animObjs,setmetatable(animation_obj,{__index=Animation}))
 	animation_obj:onAnimStart(onAnimStart):init(startingFrame,delay)
 	animation_obj
 		:onAnimOver(onAnimOver)
@@ -239,7 +240,7 @@ function animx.newAnimation(params)
 		:onChange(onChange)
 		:onCycleOver(onCycleOver)
 		:onUpdate(onUpdate)
-	
+
 	return animx.animObjs[#animx.animObjs]
 end
 
@@ -300,7 +301,7 @@ end
 		The actor itself
 ]]--
 function Actor:addAnimation(name,anim)
-	if anim.cache and anim.direction then 
+	if anim.cache and anim.direction then
 		--User provided an already created animation
 		self.animations[name]=anim
 	else
@@ -334,7 +335,7 @@ function animx.newAnimationXML(image,filename)
 			local _, y = string.match(line, "y=([\"'])(.-)%1")
 			local _, width = string.match(line, "width=([\"'])(.-)%1")
 			local _, height = string.match(line, "height=([\"'])(.-)%1")
-			
+
 			t[frameNo]=love.graphics.newQuad(x,y,width,height,sw,sh)
 			::continue::
 		end
@@ -369,7 +370,7 @@ function animx.newActorXML(image,filename)
 			local _, y = string.match(line, "y=([\"'])(.-)%1")
 			local _, width = string.match(line, "width=([\"'])(.-)%1")
 			local _, height = string.match(line, "height=([\"'])(.-)%1")
-			
+
 			t[animName][frameNo]=love.graphics.newQuad(x,y,width,height,sw,sh)
 			::continue::
 		end
@@ -388,7 +389,7 @@ end
 function Animation:exportToXML(filename)
 	filename=removePath(filename)
 	if fileExists(filename) then
-		if not animx.hideWarnings then 
+		if not animx.hideWarnings then
 			error(string.format("animX Warning! File '%s' Already Exists!",filename))
 		end
 	end
@@ -425,7 +426,7 @@ end
 function Actor:exportToXML(filename)
 	filename=removePath(filename)
 	if fileExists(filename) then
-		if not animx.hideWarnings then 
+		if not animx.hideWarnings then
 			error(string.format("animX Warning! File '%s' Already Exists!",filename))
 		end
 	end
